@@ -1,3 +1,4 @@
+
 var board = [];
 
 function getBoardArray(){
@@ -34,9 +35,12 @@ function generateBoard(){
       classAttr.value = "cell";
       var max = document.createAttribute("maxlength");
       max.value = "1";
+      var change = document.createAttribute("onchange");
+      change.value = "listenInput()";
       input.setAttributeNode(type);
       input.setAttributeNode(classAttr);
       input.setAttributeNode(max);
+      input.setAttributeNode(change);
       
       node.appendChild(input);
     }
@@ -52,10 +56,14 @@ function init(){
   
   // set name attribute to the input form
   var ele = document.getElementsByClassName("cell");
-  for (var i = 0; i < ele.length; i++){
-    var nameAttr = document.createAttribute("name");
-    nameAttr.value = i+1;
-    ele[i].setAttributeNode(nameAttr);
+  var i = 0;
+  for (var row = 0; row < 9; row++){
+    for (var col = 0; col < 9; col++){
+      var nameAttr = document.createAttribute("name");
+      nameAttr.value = "" + row + col;
+      ele[i].setAttributeNode(nameAttr);
+      i += 1;
+    }
   }
   
    // listen for input text  
@@ -68,8 +76,8 @@ function init(){
   solve(board);
   hideValue(board);
   setValue(board);
+  listenInput(board);
   console.log(board);
-  
 }
 
 // function for generate a initialized board
@@ -81,7 +89,6 @@ function generateSudoku(board){
     }
     board[0][i] = number;
   }
-  
   return board;
 }
 
@@ -113,6 +120,7 @@ function solve(board){
   return true;
 }
 
+// check if board is valid
 function isValid(board, row, col, c){
         for(var i = 0; i < 9; i++) {
             if(board[i][col] != "" && board[i][col] == c) return false; //check row
@@ -132,7 +140,7 @@ function hideValue(board){
     var check = "" + x + y;
     if (!has.includes(check)){
       has.push(check);
-      board[x][y] = undefined;
+      board[x][y] = "";
     } else {
       i -= 1;
       continue;
@@ -146,7 +154,7 @@ function setValue(board){
   var count = 0;
   for (var i = 0; i < 9; i++){
     for (var j = 0; j < 9; j++){
-      if (board[i][j] == undefined){
+      if (board[i][j] == ""){
         count += 1;
         continue;
       }
@@ -157,4 +165,34 @@ function setValue(board){
       count += 1;
     }
   }
+}
+
+// listen for input and alter the board value
+function listenInput(board){
+  $('.cell').each(function() {
+       var elem = $(this);
+  
+       // Look for changes in the value
+       elem.bind("propertychange change input paste", function(event){
+         
+         // get input value index
+         var index = elem[0].getAttribute("name");
+         var number = elem[0].value;
+         
+         var x = index.charAt(0);
+         var y = index.charAt(1);
+         
+         //var isOK = isValid(board, x, y, number);
+        
+         // check input
+         if (isNaN(number)){
+           elem[0].style.color = "red";
+         } else if (!isNaN(number)){
+           elem[0].style.color = "black";
+           board[x][y] = number;
+           return;
+         }
+        
+       });
+     });
 }
