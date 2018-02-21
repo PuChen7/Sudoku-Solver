@@ -98,8 +98,8 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
 function hideValue(board){
   var has = [];
   for (var i = 0; i < 40; i++){
-    var x = Math.floor(Math.random() * 8); // get random number between 0 to 9
-    var y = Math.floor(Math.random() * 8);
+    var x = Math.floor(Math.random() * 9); // get random number between 0 to 9
+    var y = Math.floor(Math.random() * 9);
     var check = "" + x + y;
     if (!has.includes(check)){
       has.push(check);
