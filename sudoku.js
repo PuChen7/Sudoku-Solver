@@ -36,8 +36,8 @@ function init(){
   });
       
   generateSudoku(board);
-  
   solve(board);
+  hideValue(board);
   setValue(board);
   console.log(board);
   
@@ -95,11 +95,36 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
 }
 
 // hide values
+function hideValue(board){
+  var has = [];
+  for (var i = 0; i < 40; i++){
+    var x = Math.floor(Math.random() * 8); // get random number between 0 to 9
+    var y = Math.floor(Math.random() * 8);
+    var check = "" + x + y;
+    if (!has.includes(check)){
+      has.push(check);
+      board[x][y] = undefined;
+    } else {
+      i -= 1;
+      continue;
+    }
+  }
+}
+
+// set value to inputs
 function setValue(board){
-  for (var i = 0; i < 20; i++){
-    var x = Math.floor(Math.random() * 8) + 1; // get random number between 1 to 9
-    var y = Math.floor(Math.random() * 8) + 1;
-    
-    board[x][y] = undefined;
+  var ele = document.getElementsByClassName("cell");
+  var count = 0;
+  for (var i = 0; i < 9; i++){
+    for (var j = 0; j < 9; j++){
+      if (board[i][j] == undefined){
+        count += 1;
+        continue;
+      }
+      var attr = document.createAttribute("value");
+      attr.value = board[i][j];
+      ele[count].setAttributeNode(attr);
+      count += 1;
+    }
   }
 }
