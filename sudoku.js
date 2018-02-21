@@ -1,6 +1,6 @@
 var board = [];
 
-function getBoard(){
+function getBoardArray(){
   
   // get each row of the board
   var grid_rows = [].slice.call(document.querySelectorAll(".row"));
@@ -17,9 +17,38 @@ function getBoard(){
   return board;
 };
 
+// generate HTML board: using javascript to manipulate with DOM
+function generateBoard(){
+  for (var i = 0; i < 9; i++){    
+    var node = document.createElement("div");
+    var attr = document.createAttribute("class");
+    attr.value = "grid row";
+    node.setAttributeNode(attr);
+    document.getElementById("chess-board").appendChild(node);
+    
+    for (var j = 0; j < 9; j++){
+      var input = document.createElement("input");
+      var type = document.createAttribute("type");
+      type.value = "text";
+      var classAttr = document.createAttribute("class");
+      classAttr.value = "cell";
+      var max = document.createAttribute("maxlength");
+      max.value = "1";
+      input.setAttributeNode(type);
+      input.setAttributeNode(classAttr);
+      input.setAttributeNode(max);
+      
+      node.appendChild(input);
+    }
+  }
+}
+
+// initialization
 function init(){
+  // generate HTML board
+  generateBoard();
   // get the initialized board
-  var board = getBoard();
+  var board = getBoardArray();
   
   // set name attribute to the input form
   var ele = document.getElementsByClassName("cell");
