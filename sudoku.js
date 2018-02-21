@@ -140,7 +140,7 @@ function hideValue(board){
   }
 }
 
-// set value to inputs
+// set value to inputs AND make that input read only
 function setValue(board){
   var ele = document.getElementsByClassName("cell");
   var count = 0;
@@ -153,6 +153,7 @@ function setValue(board){
       var attr = document.createAttribute("value");
       attr.value = board[i][j];
       ele[count].setAttributeNode(attr);
+      ele[count].readOnly = true;
       count += 1;
     }
   }
