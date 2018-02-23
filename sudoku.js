@@ -173,7 +173,7 @@ function listenInput(board){
        var elem = $(this);
   
        // Look for changes in the value
-       elem.bind("propertychange change input paste", function(event){
+       elem.on("propertychange change input", function(event){
          
          // get input value index
          var index = elem[0].getAttribute("name");
