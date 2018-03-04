@@ -1,6 +1,37 @@
 
 var board = [];
 
+// generate html forms
+function initializePage(){
+  // generate HTML board
+  generateBoard();
+  // get the initialized board
+  var board = getBoardArray();
+  
+  // set name attribute to the input form
+  var ele = document.getElementsByClassName("cell");
+  var i = 0;
+  for (var row = 0; row < 9; row++){
+    for (var col = 0; col < 9; col++){
+      var nameAttr = document.createAttribute("name");
+      nameAttr.value = "" + row + col;
+      ele[i].setAttributeNode(nameAttr);
+      i += 1;
+    }
+  }
+}
+
+// initialization
+function init(){
+  generateSudoku(board);
+  solve(board);
+  hideValue(board);
+  setValue(board);
+  listenInput(board);
+  console.log(board);
+}
+
+// generate a 2d array
 function getBoardArray(){
   
   // get each row of the board
@@ -45,39 +76,6 @@ function generateBoard(){
       node.appendChild(input);
     }
   }
-}
-
-// initialization
-function init(){
-  // generate HTML board
-  generateBoard();
-  // get the initialized board
-  var board = getBoardArray();
-  
-  // set name attribute to the input form
-  var ele = document.getElementsByClassName("cell");
-  var i = 0;
-  for (var row = 0; row < 9; row++){
-    for (var col = 0; col < 9; col++){
-      var nameAttr = document.createAttribute("name");
-      nameAttr.value = "" + row + col;
-      ele[i].setAttributeNode(nameAttr);
-      i += 1;
-    }
-  }
-  
-   // listen for input text  
-  $('.container').on('input', 'input', function(){
-    var $input = $(this);
-    $input.attr('value', $input.val());    
-  });
-      
-  generateSudoku(board);
-  solve(board);
-  hideValue(board);
-  setValue(board);
-  listenInput(board);
-  console.log(board);
 }
 
 // function for generate a initialized board
@@ -200,7 +198,6 @@ function listenInput(board){
 }
 
 function checkResult(){
-  console.log(board);
   for (var i = 0; i < 9; i++){
     for (var j = 0; j < 9; j++){
       var check = isFinished(board, i, j, board[i][j]);
@@ -223,4 +220,23 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
 ((3 * Math.floor(row / 3) + Math.floor(i / 3)) != row && (3 * Math.floor(col / 3) + Math.floor(i % 3)) != col)) return false; //check 3*3 block
   }
   return true;
+}
+
+function reset(){
+  // reset 2d array
+  for (var i = 0; i < 9; i++){
+    for (var j = 0; j < 9; j++){
+      board[i][j] = "";
+    }
+  }
+  
+  var ele = document.getElementsByClassName("cell");
+  for (var i = 0; i < ele.length; i++){
+    var attr = document.createAttribute("value");
+    attr.value = "";
+    ele[i].setAttributeNode(attr);
+    ele[i].readOnly = false;
+  }
+
+  init();
 }

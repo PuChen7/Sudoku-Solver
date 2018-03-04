@@ -6,7 +6,7 @@
 }
 
 #chess-board{
-  margin: 80px;
+  margin-bottom: 50px;
 }
 
 /* Board position */
@@ -22,7 +22,7 @@
   width: 50px;
   height: 50px;
   text-align: center;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: bold;
   border-top: 0;
   border-left: 0;
@@ -47,7 +47,6 @@
 }
 
 .submitbtn {
-  
   background-color: white;
   color: black;
   border: 2px solid #555555;
