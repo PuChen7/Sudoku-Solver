@@ -190,7 +190,7 @@ function listenInput(board){
           elem[0].style.color = "red";
         } else if (!isNaN(number)){   // is a number
           
-          elem[0].style.color = "black";
+          elem[0].style.color = "blue";
           board[x][y] = parseInt(number);
           return;
         }
@@ -203,13 +203,14 @@ function checkResult(){
   console.log(board);
   for (var i = 0; i < 9; i++){
     for (var j = 0; j < 9; j++){
-      var check = isValid(board, i, j, board[i][j]);
+      var check = isFinished(board, i, j, board[i][j]);
       if (check == false){
-        alert("false");
+        alert("incorrect answer!");
         return;
       }
     }
   }
+  alert("You win!")
 }
 
 // check if board is valid
@@ -218,7 +219,8 @@ function isFinished(board, row, col, c){
       if(board[i][col] != "" && board[i][col] == c && i != row) return false; //check row
       if(board[row][i] != "" && board[row][i] == c && i != col) return false; //check column
       if(board[3 * Math.floor(row / 3) + Math.floor(i / 3)][ 3 * Math.floor(col / 3) + Math.floor(i % 3)] != "" && 
-board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Math.floor(i % 3)] == c) return false; //check 3*3 block
+board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Math.floor(i % 3)] == c && 
+((3 * Math.floor(row / 3) + Math.floor(i / 3)) != row && (3 * Math.floor(col / 3) + Math.floor(i % 3)) != col)) return false; //check 3*3 block
   }
   return true;
 }
