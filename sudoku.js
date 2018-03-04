@@ -98,7 +98,7 @@ function getRandomNum(){
   return number;
 }
 
-/* function for solving sudoku */
+/* function for solving sudoku using backtracking algorithm */
 function solve(board){
   for(var i = 0; i < board.length; i++){
     for(var j = 0; j < board[0].length; j++){
@@ -134,7 +134,7 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
 // hide values
 function hideValue(board){
   var has = [];
-  for (var i = 0; i < 40; i++){
+  for (var i = 0; i < 1; i++){
     var x = Math.floor(Math.random() * 9); // get random number between 0 to 9
     var y = Math.floor(Math.random() * 9);
     var check = "" + x + y;
@@ -169,30 +169,56 @@ function setValue(board){
 
 // listen for input and alter the board value
 function listenInput(board){
-  $('.cell').each(function() {
-       var elem = $(this);
-  
-       // Look for changes in the value
-       elem.on("propertychange change input", function(event){
-         
-         // get input value index
-         var index = elem[0].getAttribute("name");
-         var number = elem[0].value;
-         
-         var x = index.charAt(0);
-         var y = index.charAt(1);
-         
-         //var isOK = isValid(board, x, y, number);
+  $(document).ready(function(){
+    $('.cell').each(function() {
+      var elem = $(this);
+ 
+      // Look for changes in the value
+      elem.on("propertychange change input", function(event){
         
-         // check input
-         if (isNaN(number)){
-           elem[0].style.color = "red";
-         } else if (!isNaN(number)){
-           elem[0].style.color = "black";
-           board[x][y] = number;
-           return;
-         }
+        // get input value index
+        var index = elem[0].getAttribute("name");
+        var number = elem[0].value;
         
-       });
-     });
+        var x = index.charAt(0);
+        var y = index.charAt(1);
+        
+        //var isOK = isValid(board, x, y, number);
+       
+        // check input
+        if (isNaN(number)){ // not a number
+          elem[0].style.color = "red";
+        } else if (!isNaN(number)){   // is a number
+          
+          elem[0].style.color = "black";
+          board[x][y] = parseInt(number);
+          return;
+        }
+      });
+    });
+  });
+}
+
+function checkResult(){
+  console.log(board);
+  for (var i = 0; i < 9; i++){
+    for (var j = 0; j < 9; j++){
+      var check = isValid(board, i, j, board[i][j]);
+      if (check == false){
+        alert("false");
+        return;
+      }
+    }
+  }
+}
+
+// check if board is valid
+function isFinished(board, row, col, c){
+  for(var i = 0; i < 9; i++) {
+      if(board[i][col] != "" && board[i][col] == c && i != row) return false; //check row
+      if(board[row][i] != "" && board[row][i] == c && i != col) return false; //check column
+      if(board[3 * Math.floor(row / 3) + Math.floor(i / 3)][ 3 * Math.floor(col / 3) + Math.floor(i % 3)] != "" && 
+board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Math.floor(i % 3)] == c) return false; //check 3*3 block
+  }
+  return true;
 }
