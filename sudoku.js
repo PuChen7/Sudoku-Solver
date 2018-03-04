@@ -33,7 +33,6 @@ function init(){
 
 // generate a 2d array
 function getBoardArray(){
-  
   // get each row of the board
   var grid_rows = [].slice.call(document.querySelectorAll(".row"));
   
@@ -132,7 +131,8 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
 // hide values
 function hideValue(board){
   var has = [];
-  for (var i = 0; i < 1; i++){
+  /* NOTE: i is the number of cells will be hidden for user */
+  for (var i = 0; i < 40; i++){
     var x = Math.floor(Math.random() * 9); // get random number between 0 to 9
     var y = Math.floor(Math.random() * 9);
     var check = "" + x + y;

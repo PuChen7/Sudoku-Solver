@@ -6,7 +6,8 @@ Sudoku is a logic-based, combinatorial number-placement puzzle. The objective is
 ### Total combinations
 There are 6,670,903,752,021,072,936,960 Sudoku grids. This number is provided by Bertram Felgenhauer and Frazer Jarvis in 2005.
 
-### Generating the board using JavaScript HTML DOM Elements
+### Generating the form using JavaScript HTML DOM Elements
+Creating and dispatching DOM events using JavaScript. Simple example: `var classAttr = document.createAttribute("class");`. 
 
 ## Initial Board
 After doing some research, I found out that there are many ways to generate a initial board.
@@ -14,9 +15,9 @@ After doing some research, I found out that there are many ways to generate a in
 2. Generate some random numbers and solve the board so that there's a complete game board. Then we can randomly hide some numbers.
 
 ## Algorithm
-* Backtracking
+### Backtracking
+This algorithm tries 1 trough 9 for each cell. If the number is valid, then it goes deeper. If the number is invalid, then it backs to the previous position and picks another number.
 
-* 3*3 Block validation
-  ```javascript 
-  board[Math.floor(3 * (row / 3) + i / 3)][Math.floor(3 * (col / 3) + i % 3)] 
-  ```
+Time Complexity: O(9^m) - m is the number of empty cells
+
+In a simpler case, if there's only one blank cell, the worst case is 9 possibilities. If there are two blank cells, then you need to walk through 9 possibilities for the first blank cell, which is 81 possibilities in total.
