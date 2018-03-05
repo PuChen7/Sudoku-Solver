@@ -21,3 +21,6 @@ This algorithm tries 1 trough 9 for each cell. If the number is valid, then it g
 Time Complexity: O(9^m) - m is the number of empty cells
 
 In a simpler case, if there's only one blank cell, the worst case is 9 possibilities. If there are two blank cells, then you need to walk through 9 possibilities for the first blank cell, which is 81 possibilities in total.
+
+## Next Update
+looking for a better way to generate sudoku game based on level of difficulties. 
