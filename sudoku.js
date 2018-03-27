@@ -172,7 +172,7 @@ function listenInput(board){
       var elem = $(this);
  
       // Look for changes in the value
-      elem.on("propertychange change input", function(event){
+      elem.on("change input", function(event){
         
         // get input value index
         var index = elem[0].getAttribute("name");
@@ -213,6 +213,7 @@ function checkResult(){
 // check if board is valid
 function isFinished(board, row, col, c){
   for(var i = 0; i < 9; i++) {
+      if (board[row][col] == "") return false;
       if(board[i][col] != "" && board[i][col] == c && i != row) return false; //check row
       if(board[row][i] != "" && board[row][i] == c && i != col) return false; //check column
       if(board[3 * Math.floor(row / 3) + Math.floor(i / 3)][ 3 * Math.floor(col / 3) + Math.floor(i % 3)] != "" && 

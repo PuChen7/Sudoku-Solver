@@ -22,5 +22,19 @@ Time Complexity: O(9^m) - m is the number of empty cells
 
 In a simpler case, if there's only one blank cell, the worst case is 9 possibilities. If there are two blank cells, then you need to walk through 9 possibilities for the first blank cell, which is 81 possibilities in total.
 
+## Difficulty Level
+### The total amount of given cells
+Tt is reasonable to argue that the more empty cells provided at the initial Sudoku game, the harder  the puzzle can be solved. 
+
+* Table: The amount ranges of givens in each difficult level 
+
+|      Level     | Given amount |
+|:--------------:|:------------:|
+| Extremely Easy |      ≥50     |
+|      Easy      |     36-49    |
+|     Medium     |     32-35    |
+|    Difficult   |     28-31    |
+|      Evil      |     22-27    |
+
 ## Next Update
 looking for a better way to generate sudoku game based on level of difficulties. 
