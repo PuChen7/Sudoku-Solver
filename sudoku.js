@@ -189,6 +189,10 @@ function listenInput(board){
         } else if (!isNaN(number)){   // is a number
           
           elem[0].style.color = "blue";
+          // set the DOM element
+          var attr = document.createAttribute("value");
+          attr.value = number;
+          elem[0].setAttributeNode(attr);
           board[x][y] = parseInt(number);
           return;
         }
@@ -223,23 +227,20 @@ board[3 * Math.floor(row / 3) + Math.floor(i / 3)][3 * Math.floor(col / 3) + Mat
   return true;
 }
 
+// function for reset the game board
 function reset(){
-  // reset 2d array
-  for (var i = 0; i < 9; i++){
-    for (var j = 0; j < 9; j++){
-      board[i][j] = "";
-    }
-  }
-  
   var ele = document.getElementsByClassName("cell");
   for (var i = 0; i < ele.length; i++){
-    var attr = document.createAttribute("value");
-    attr.value = "";
-    ele[i].setAttributeNode(attr);
-    ele[i].readOnly = false;
+    //var attr = document.createAttribute("value");
+    if (ele[i].readOnly == false){
+      ele[i].value = "";  // reset DOM
+      // reset board
+      var index = ele[i].getAttribute("name");      
+      var x = index.charAt(0);
+      var y = index.charAt(1);
+      board[x][y] = "";
+    } 
   }
-
-  init();
 }
 
 // function for getting the user chosen difficulty level
