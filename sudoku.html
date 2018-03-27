@@ -23,7 +23,17 @@
 </script>
 <div id="buttons">
   <button class="submitbtn" onclick="checkResult()">Submit</button>
-  <button class="submitbtn" type = "reset" onclick="reset()">Reset</button>
+
+  <form action="" method="POST" onchange="getDifficulty()">
+    <select id="diff_form" name="difficulty">
+      <option value="ee">Extremely Easy</option>
+      <option value="e">Easy</option>
+      <option value="m">Medium</option>
+      <option value="h">Hard</option>
+      <option value="evil">Evil</option>
+    </select>
+  </form>
+  
 </div>
 </body>
 </html>

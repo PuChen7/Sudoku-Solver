@@ -241,3 +241,9 @@ function reset(){
 
   init();
 }
+
+// function for getting the user chosen difficulty level
+function getDifficulty(){
+  // get the user chosen difficulty level
+  var diff = document.getElementById("diff_form").value;
+}
