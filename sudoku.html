@@ -22,10 +22,10 @@
   init();
 </script>
 <div id="buttons">
-  <button class="submitbtn" onclick="checkResult()">Submit Answer</button>
+  <button id="inner_btn" class="submitbtn" onclick="checkResult()">Submit Answer</button>
 
-  <form action="" method="POST" onchange="getDifficulty()">
-    <select id="diff_form" name="difficulty">
+  <form id="inner_btn" action="" method="POST" onchange="getDifficulty()">
+    <select class="diff_form" name="difficulty">
       <option value="ee">Extremely Easy</option>
       <option value="e">Easy</option>
       <option value="m">Medium</option>
@@ -34,7 +34,7 @@
     </select>
   </form>
   
-  <button class="submitbtn" onclick="reset()">Reset Board</button>
+  <button  id="inner_btn" class="submitbtn" onclick="reset()">Reset Board</button>
 </div>
 </body>
 </html>
